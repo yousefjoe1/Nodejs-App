@@ -13,7 +13,7 @@ app.listen(port,()=>{
 })
 
 app.get('/',(req,res)=>{
-  res.send('Starting Page')
+  res.send('Starting Page (home end point)')
 })
 
 app.get('/api/images',async (req,res)=>{
@@ -27,7 +27,7 @@ app.get('/api/images',async (req,res)=>{
       await resizeFunc(`${imgPath}`,width,height,`${__dirname}/../cachedImages/${imgName}_${width}_${height}.jpg`)
 
     await fsp.readFile(`${__dirname}/../cachedImages/${imgName}_${width}_${height}.jpg`,(err:string,data:string)=> {
-        if(err) throw err;
+        if(err) res.send('Error with resizing the image');
         ;
         res.writeHead(200, {'Content-Type': 'image/jpg' });
         
